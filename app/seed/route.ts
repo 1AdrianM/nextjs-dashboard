@@ -92,7 +92,7 @@ async function seedRevenue() {
     revenue.map(
       (rev) => sql`
         INSERT INTO revenue (month, revenue)
-        VALUES (${rev.month}, ${rev.revenue})
+        VALUES (${rev.month}, ${Number(rev.revenue)})
         ON CONFLICT (month) DO NOTHING;
       `,
     ),

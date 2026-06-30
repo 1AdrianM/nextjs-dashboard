@@ -1,5 +1,6 @@
 import postgres from 'postgres';
 import {
+  Customer,
   CustomerField,
   CustomersTableType,
   InvoiceForm,
@@ -183,6 +184,25 @@ export async function fetchCustomers() {
     throw new Error('Failed to fetch all customers.');
   }
 }
+export async function fetchCustomersById(id:string){
+try{
+  const customer = await sql<Customer[]>`
+      SELECT
+        id,
+        name,
+        email,
+        image_url
+      FROM customers
+      WHERE id = ${id}
+    `;
+    
+    return customer;
+  }catch (err) {
+    console.error('Database Error:', err);
+    throw new Error('Failed to fetch customer by id.');
+  }
+}
+
 
 export async function fetchFilteredCustomers(query: string) {
   try {

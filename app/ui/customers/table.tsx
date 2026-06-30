@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { lusitana } from '@/app/ui/fonts';
 import Search from '@/app/ui/search';
 import { FormattedCustomersTable } from '@/app/lib/definitions';
+import Link from 'next/link';
 
 export default async function CustomersTable({
   customers,
@@ -35,7 +36,11 @@ export default async function CustomersTable({
                               width={28}
                               height={28}
                             />
-                            <p>{customer.name}</p>
+                            <p>{customer.name}
+                              <Link href={`/dashboard/customers/${customer.id}`} className="text-blue-500 hover:underline">
+                                View Details
+                              </Link>
+                            </p>
                           </div>
                         </div>
                         <p className="text-sm text-gray-500">
